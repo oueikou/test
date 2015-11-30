@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fileManager.dao.user.UserDao" >
+
+<!-- 自动生成部分，勿修改 start -->
+  <resultMap id="BaseResultMap" type="com.fileManager.entity.user.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="user_type" property="userType" jdbcType="INTEGER" />
+    <result column="is_disabled" property="isDisabled" jdbcType="INTEGER" />
+    <result column="is_deleted" property="isDeleted" jdbcType="INTEGER" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="identity_card" property="identityCard" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="INTEGER" />
+    <result column="create_dt" property="createDt" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="INTEGER" />
+    <result column="update_dt" property="updateDt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, login_name, real_name, password, user_type, is_disabled, is_deleted, mobile, 
+    email, identity_card, token, create_by, create_dt, update_by, update_dt
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fm_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fm_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fileManager.entity.user.User" >
+    <selectKey resultType="java.lang.Integer" keyProperty="userId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fm_user (login_name, real_name, password, 
+      user_type, is_disabled, is_deleted, 
+      mobile, email, identity_card, 
+      token, create_by, create_dt, 
+      update_by, update_dt)
+    values (#{loginName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=INTEGER}, #{isDisabled,jdbcType=INTEGER}, #{isDeleted,jdbcType=INTEGER}, 
+      #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{identityCard,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{createBy,jdbcType=INTEGER}, #{createDt,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=INTEGER}, #{updateDt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fileManager.entity.user.User" >
+    <selectKey resultType="java.lang.Integer" keyProperty="userId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fm_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="loginName != null" >
+        login_name,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
+      <if test="isDisabled != null" >
+        is_disabled,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="identityCard != null" >
+        identity_card,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDt != null" >
+        create_dt,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDt != null" >
+        update_dt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="isDisabled != null" >
+        #{isDisabled,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCard != null" >
+        #{identityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createDt != null" >
+        #{createDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="updateDt != null" >
+        #{updateDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fileManager.entity.user.User" >
+    update fm_user
+    <set >
+      <if test="loginName != null" >
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="isDisabled != null" >
+        is_disabled = #{isDisabled,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCard != null" >
+        identity_card = #{identityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createDt != null" >
+        create_dt = #{createDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="updateDt != null" >
+        update_dt = #{updateDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fileManager.entity.user.User" >
+    update fm_user
+    set login_name = #{loginName,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=INTEGER},
+      is_disabled = #{isDisabled,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      identity_card = #{identityCard,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=INTEGER},
+      create_dt = #{createDt,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=INTEGER},
+      update_dt = #{updateDt,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+<!-- 自动生成部分，勿修改 end -->
+
+  <!-- 按条件查询 -->
+  <select id="selectListByParam" resultMap="BaseResultMap" parameterType="com.fileManager.entity.user.User" >
+    select 
+    <include refid="Base_Column_List" />
+    from fm_user
+    <where>
+      1=1 
+    <if test="userId!=null">
+      AND user_id = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="loginName != null" >
+       AND login_name = #{loginName,jdbcType=VARCHAR}
+     </if>
+     <if test="realName != null" >
+       AND real_name = #{realName,jdbcType=VARCHAR}
+     </if>
+     <if test="password != null" >
+       AND password = #{password,jdbcType=VARCHAR}
+     </if>
+     <if test="userType != null" >
+       AND user_type = #{userType,jdbcType=INTEGER}
+     </if>
+     <if test="isDisabled != null" >
+       AND is_disabled = #{isDisabled,jdbcType=INTEGER}
+     </if>
+     <if test="isDeleted != null" >
+       AND is_deleted = #{isDeleted,jdbcType=INTEGER}
+     </if>
+     <if test="mobile != null" >
+       AND mobile = #{mobile,jdbcType=VARCHAR}
+     </if>
+     <if test="email != null" >
+       AND email = #{email,jdbcType=VARCHAR}
+     </if>
+     <if test="identityCard != null" >
+       AND identity_card = #{identityCard,jdbcType=VARCHAR}
+     </if>
+     <if test="token != null" >
+       AND token = #{token,jdbcType=VARCHAR}
+     </if>
+     <if test="createBy != null" >
+       AND create_by = #{createBy,jdbcType=INTEGER}
+     </if>
+     <if test="createDt != null" >
+       AND create_dt = #{createDt,jdbcType=TIMESTAMP}
+     </if>
+     <if test="updateBy != null" >
+       AND update_by = #{updateBy,jdbcType=INTEGER}
+     </if>
+     <if test="updateDt != null" >
+       AND update_dt = #{updateDt,jdbcType=TIMESTAMP}
+     </if>
+    </where>
+  </select>
+  
+  
+  
+</mapper>

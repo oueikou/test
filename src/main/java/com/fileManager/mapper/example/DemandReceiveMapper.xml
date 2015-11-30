@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fileManager.dao.example.DemandReceiveDao" >
+  <resultMap id="BaseResultMap" type="com.fileManager.entity.example.DemandReceive" >
+    <id column="DEMAND_RECEIVE_ID" property="demandReceiveId" jdbcType="BIGINT" />
+    <result column="DEMAND_SEND_ID" property="demandSendId" jdbcType="BIGINT" />
+    <result column="RECEIVE_STORE_ID" property="receiveStoreId" jdbcType="BIGINT" />
+    <result column="RECEIVE_ORG_ID" property="receiveOrgId" jdbcType="BIGINT" />
+    <result column="RECEIVE_USER_ID" property="receiveUserId" jdbcType="BIGINT" />
+    <result column="RECEIVE_DATE" property="receiveDate" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="IS_DELETED" property="isDeleted" jdbcType="INTEGER" />
+    <result column="CREATE_BY" property="createBy" jdbcType="BIGINT" />
+    <result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_BY" property="updateBy" jdbcType="BIGINT" />
+    <result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DEMAND_RECEIVE_ID, DEMAND_SEND_ID, RECEIVE_STORE_ID, RECEIVE_ORG_ID, RECEIVE_USER_ID, 
+    RECEIVE_DATE, STATUS, IS_DELETED, CREATE_BY, CREATE_DT, UPDATE_BY, UPDATE_DT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from DEMAND_RECEIVE
+    where DEMAND_RECEIVE_ID = #{demandReceiveId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from DEMAND_RECEIVE
+    where DEMAND_RECEIVE_ID = #{demandReceiveId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fileManager.entity.example.DemandReceive" useGeneratedKeys="true" keyProperty="demandReceiveId">
+    insert into DEMAND_RECEIVE (DEMAND_SEND_ID, RECEIVE_STORE_ID, RECEIVE_ORG_ID, 
+      RECEIVE_USER_ID, RECEIVE_DATE, STATUS, 
+      IS_DELETED, CREATE_BY, CREATE_DT, 
+      UPDATE_BY, UPDATE_DT)
+    values (#{demandSendId,jdbcType=BIGINT}, #{receiveStoreId,jdbcType=BIGINT}, #{receiveOrgId,jdbcType=BIGINT}, 
+      #{receiveUserId,jdbcType=BIGINT}, #{receiveDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{isDeleted,jdbcType=INTEGER}, #{createBy,jdbcType=BIGINT}, #{createDt,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=BIGINT}, #{updateDt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fileManager.entity.example.DemandReceive" >
+    <selectKey resultType="java.lang.Long" keyProperty="demandReceiveId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into DEMAND_RECEIVE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="demandSendId != null" >
+        DEMAND_SEND_ID,
+      </if>
+      <if test="receiveStoreId != null" >
+        RECEIVE_STORE_ID,
+      </if>
+      <if test="receiveOrgId != null" >
+        RECEIVE_ORG_ID,
+      </if>
+      <if test="receiveUserId != null" >
+        RECEIVE_USER_ID,
+      </if>
+      <if test="receiveDate != null" >
+        RECEIVE_DATE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="isDeleted != null" >
+        IS_DELETED,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createDt != null" >
+        CREATE_DT,
+      </if>
+      <if test="updateBy != null" >
+        UPDATE_BY,
+      </if>
+      <if test="updateDt != null" >
+        UPDATE_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="demandSendId != null" >
+        #{demandSendId,jdbcType=BIGINT},
+      </if>
+      <if test="receiveStoreId != null" >
+        #{receiveStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="receiveOrgId != null" >
+        #{receiveOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="receiveUserId != null" >
+        #{receiveUserId,jdbcType=BIGINT},
+      </if>
+      <if test="receiveDate != null" >
+        #{receiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDt != null" >
+        #{createDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateDt != null" >
+        #{updateDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fileManager.entity.example.DemandReceive" >
+    update DEMAND_RECEIVE
+    <set >
+      <if test="demandSendId != null" >
+        DEMAND_SEND_ID = #{demandSendId,jdbcType=BIGINT},
+      </if>
+      <if test="receiveStoreId != null" >
+        RECEIVE_STORE_ID = #{receiveStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="receiveOrgId != null" >
+        RECEIVE_ORG_ID = #{receiveOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="receiveUserId != null" >
+        RECEIVE_USER_ID = #{receiveUserId,jdbcType=BIGINT},
+      </if>
+      <if test="receiveDate != null" >
+        RECEIVE_DATE = #{receiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null" >
+        IS_DELETED = #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDt != null" >
+        CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        UPDATE_BY = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateDt != null" >
+        UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DEMAND_RECEIVE_ID = #{demandReceiveId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fileManager.entity.example.DemandReceive" >
+    update DEMAND_RECEIVE
+    set DEMAND_SEND_ID = #{demandSendId,jdbcType=BIGINT},
+      RECEIVE_STORE_ID = #{receiveStoreId,jdbcType=BIGINT},
+      RECEIVE_ORG_ID = #{receiveOrgId,jdbcType=BIGINT},
+      RECEIVE_USER_ID = #{receiveUserId,jdbcType=BIGINT},
+      RECEIVE_DATE = #{receiveDate,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=INTEGER},
+      IS_DELETED = #{isDeleted,jdbcType=INTEGER},
+      CREATE_BY = #{createBy,jdbcType=BIGINT},
+      CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=BIGINT},
+      UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP}
+    where DEMAND_RECEIVE_ID = #{demandReceiveId,jdbcType=BIGINT}
+  </update>
+</mapper>
