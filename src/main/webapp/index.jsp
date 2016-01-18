@@ -9,5 +9,7 @@ window.location.href = "${basePath}/views/login/login.jsp";
 </head>
 <body>
 <h2>加载中...</h2>
+1111111
+yongheng ok
 </body>
 </html>
